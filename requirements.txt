@@ -1,5 +1,4 @@
-# Web framework
 flask
-
-# For HTTP requests (website analyzer)
 requests
+gunicorn
+python-dotenv

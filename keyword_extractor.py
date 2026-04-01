@@ -1,9 +1,9 @@
 # Extract keywords from company description
 def extract_keywords(description):
-    # Convert text to lowercase and split into words
+    # Convert text to lowercase
     words = description.lower().split()
 
     # Remove duplicates using set
-    keywords = list(set(words))
+    unique_words = list(set(words))
 
-    return keywords
+    return unique_words

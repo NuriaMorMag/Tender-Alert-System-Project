@@ -1,14 +1,9 @@
 import requests
 
-# Analyze a company website
-def analyze_website(url):
+# Get text content from a website
+def get_website_text(url):
     try:
-        # Fetch website content
         response = requests.get(url)
-
-        # Return first 500 characters
-        return response.text[:500]
-
+        return response.text  # Return full HTML text
     except:
-        # If something fails, return empty string
-        return ""
+        return ""  # Return empty if error

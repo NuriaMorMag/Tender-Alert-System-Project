@@ -1,15 +1,27 @@
-import uuid
+import smtplib
+from email.mime.text import MIMEText
 
-# Generate a unique token for email verification
-def generate_token():
-    return str(uuid.uuid4())
-
+# Send a verification email to the user
 def send_verification_email(email):
-    # Create a unique token
-    token = generate_token()
+    # Create email message
+    msg = MIMEText("Click this link to verify your account")
+    msg["Subject"] = "Verify your account"
+    msg["From"] = "your_email@gmail.com"
+    msg["To"] = email
 
-    # Create verification link
-    link = f"http://localhost:5000/verify/{token}"
+    try:
+        # Connect to Gmail SMTP server
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()  # Secure connection
 
-    # Simulate sending email (for now just print)
-    print(f"[EMAIL] Send this link to {email}: {link}")
+        # Login to email account
+        server.login("your_email@gmail.com", "your_password")
+
+        # Send email
+        server.send_message(msg)
+
+        # Close connection
+        server.quit()
+
+    except Exception as e:
+        print("Error sending email:", e)
