@@ -2,7 +2,7 @@
 from database_helper import get_active_companies
 from coincidence_analyzer import compute_match_score
 from email_verification import send_email
-from jnportal_fetch import fetch_new_tenders
+from tender_fetch import fetch_new_tenders
 
 def run_matching_cycle():
     """

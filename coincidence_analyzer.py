@@ -1,34 +1,38 @@
-# coincidence_analyzer.py
+# --------------------------------------------------
+# FUNCTION: analyze_tender
+# --------------------------------------------------
+# This function checks if a tender matches a company.
+#
+# CURRENT LOGIC:
+# - Very simple keyword matching
+#
+# FUTURE:
+# - Replace with AI (Gemini, OpenAI, etc.)
+# --------------------------------------------------
+def analyze_tender(company, tender):
+    # Convert text to lowercase for easier comparison
+    company_text = company["description"].lower()
+    tender_text = tender["description"].lower()
 
-def compute_match_score(company_profile: str, tender_text: str) -> int:
-    """
-    Compute how well a tender matches a company (0–100).
+    # Split company description into words
+    words = company_text.split()
 
-    REAL WORLD:
-    - Send both texts to Google Gemini:
-      "Given this company profile and this tender, how relevant is it (0-100)?"
-    - Parse the numeric score from the AI response.
+    # Check if any word appears in the tender description
+    for word in words:
+        if word in tender_text:
+            return True  # Match found
 
-    HERE:
-    - Simple placeholder:
-      * split company_profile into words
-      * count how many appear in tender_text
-      * convert to percentage
-    """
-    if not company_profile:
-        return 0
+    return False  # No match
 
-    tender_text = tender_text.lower()
-    words = company_profile.lower().split()
-    words = [w for w in words if len(w) > 3]  # ignore very short words
-
-    if not words:
-        return 0
-
-    matches = 0
-    for w in set(words):
-        if w in tender_text:
-            matches += 1
-
-    score = int((matches / len(set(words))) * 100)
-    return score
+# --------------------------------------------------
+# FUTURE AI INTEGRATION
+# --------------------------------------------------
+# This is where real AI would go
+#
+# Example idea:
+# - Send company + tender text to Gemini
+# - Ask: "Is this relevant?"
+# - Get a score (0–1)
+#
+# def analyze_with_ai(company, tender):
+#     pass
