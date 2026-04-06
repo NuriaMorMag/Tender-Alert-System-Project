@@ -1,25 +1,29 @@
-<!DOCTYPE html>
+<!-- templates/index.html -->
+<!doctype html>
 <html>
-<head>
-    <title>Tender Alert</title>
-</head>
-<body>
+  <head>
+    <title>Tender Alerts - Register</title>
+  </head>
+  <body>
+    <h1>Tender Alerts</h1>
+    <p>Register your company to receive automatic tender alerts from public tenders.</p>
 
-    <h1>Register your company</h1>
+    <form method="POST">
+      <label>Company name:</label><br>
+      <input type="text" name="name" required><br><br>
 
-    <!-- Registration form -->
-    <form action="/register" method="post">
-        <!-- Email input -->
-        <input type="email" name="email" placeholder="Email" required>
-        <br><br>
+      <label>Email:</label><br>
+      <input type="email" name="email" required><br><br>
 
-        <!-- Company description -->
-        <textarea name="description" placeholder="Describe your business"></textarea>
-        <br><br>
+      <label>Website (optional):</label><br>
+      <input type="text" name="website"><br><br>
 
-        <!-- Submit button -->
-        <button type="submit">Register</button>
+      <label>Describe what your company does:</label><br>
+      <textarea name="description" rows="5" cols="40" required></textarea><br><br>
+
+      <button type="submit">Register</button>
     </form>
 
-</body>
+    <p><a href="/unsubscribe">Unsubscribe</a></p>
+  </body>
 </html>
