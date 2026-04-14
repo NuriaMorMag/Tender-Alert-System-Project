@@ -1,38 +1,18 @@
-# --------------------------------------------------
-# FUNCTION: analyze_tender
-# --------------------------------------------------
-# This function checks if a tender matches a company.
-#
-# CURRENT LOGIC:
-# - Very simple keyword matching
-#
-# FUTURE:
-# - Replace with AI (Gemini, OpenAI, etc.)
-# --------------------------------------------------
-def analyze_tender(company, tender):
-    # Convert text to lowercase for easier comparison
-    company_text = company["description"].lower()
-    tender_text = tender["description"].lower()
+# coincidence_analyzer.py
 
-    # Split company description into words
-    words = company_text.split()
+# Keywords to match tenders
+KEYWORDS = ["smartcards", "javacards"]
 
-    # Check if any word appears in the tender description
-    for word in words:
-        if word in tender_text:
-            return True  # Match found
 
-    return False  # No match
+def is_relevant(tender_text):
+    """
+    Check if a tender contains any relevant keyword.
+    """
 
-# --------------------------------------------------
-# FUTURE AI INTEGRATION
-# --------------------------------------------------
-# This is where real AI would go
-#
-# Example idea:
-# - Send company + tender text to Gemini
-# - Ask: "Is this relevant?"
-# - Get a score (0–1)
-#
-# def analyze_with_ai(company, tender):
-#     pass
+    text = tender_text.lower()
+
+    for keyword in KEYWORDS:
+        if keyword in text:
+            return True
+
+    return False
