@@ -1,16 +1,15 @@
-# email_sender.py - FIXED SECURITY
+# email_sender.py
 
 import smtplib
 import os
 from email.mime.text import MIMEText
 
 
-def send_email(to_email, tender_text):
+def send_email(to_email, content):
     """
     Send an email alert with tender information.
     """
 
-    # Get credentials from environment variables
     sender = os.getenv("EMAIL_USER")
     password = os.getenv("EMAIL_PASS")
 
@@ -18,7 +17,7 @@ def send_email(to_email, tender_text):
         print("Email credentials not set!")
         return
 
-    msg = MIMEText(f"New relevant tender found:\n\n{tender_text}")
+    msg = MIMEText(content)
     msg["Subject"] = "Tender Alert 🚨"
     msg["From"] = sender
     msg["To"] = to_email

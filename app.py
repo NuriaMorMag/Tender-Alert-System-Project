@@ -1,12 +1,9 @@
 # app.py
 
 from flask import Flask, request, render_template
-from database_helper import init_db, save_user
+from database_helper import save_user
 
 app = Flask(__name__)
-
-# Initialize database when app starts
-init_db()
 
 
 @app.route("/", methods=["GET", "POST"])

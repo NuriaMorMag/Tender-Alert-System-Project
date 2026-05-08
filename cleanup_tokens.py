@@ -1,17 +1,8 @@
-# cleanup_tokens.py
-
-import sqlite3
+from database_helper import get_connection
 import time
 
-DB_NAME = "tenders.db"
-
-
 def cleanup_expired_tokens():
-    """
-    Remove tokens older than 24 hours.
-    """
-
-    conn = sqlite3.connect(DB_NAME)
+    conn = get_connection()
     c = conn.cursor()
 
     now = int(time.time())

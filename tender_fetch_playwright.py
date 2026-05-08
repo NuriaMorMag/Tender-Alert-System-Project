@@ -1,12 +1,7 @@
-# tender_fetch_playwright.py
-
 from playwright.sync_api import sync_playwright
 
-
 def fetch_tenders():
-    """
-    Open the Serbian procurement portal and extract tenders.
-    """
+    url = "https://jnportal.ujn.gov.rs/"
 
     tenders = []
 
@@ -14,20 +9,21 @@ def fetch_tenders():
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
 
-        # Open website
-        page.goto("https://jnportal.ujn.gov.rs/konzola", timeout=60000)
+        page.goto(url)
+        page.wait_for_timeout(5000)
 
-        # Wait for table to load (better than sleep)
-        page.wait_for_selector("table")
-
-        rows = page.query_selector_all("table tr")
+        rows = page.query_selector_all("table tbody tr")
 
         for row in rows:
-            text = row.inner_text().strip()
+            cols = row.query_selector_all("td")
 
-            if text:
+            if len(cols) >= 2:
+                text = cols[0].inner_text().strip()
+                date = cols[1].inner_text().strip()
+
                 tenders.append({
-                    "text": text
+                    "text": text,
+                    "date": date
                 })
 
         browser.close()
