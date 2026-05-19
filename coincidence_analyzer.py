@@ -1,17 +1,23 @@
 # coincidence_analyzer.py
 
-# Keywords to match tenders
-KEYWORDS = ["smartcards", "javacards"]
+KEYWORDS = [
+    "smartcard",
+    "smartcards",
+    "javacard",
+    "javacards",
+    "систем",
+    "card"
+]  
 
 
-def is_relevant(tender_text):
+def is_relevant(text):
     """
     Check if a tender contains any relevant keyword.
     """
-
-    text = tender_text.lower()
+    text = text.lower()
 
     for keyword in KEYWORDS:
+
         if keyword in text:
             return True
 

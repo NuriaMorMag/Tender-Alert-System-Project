@@ -1,17 +1,26 @@
-from datetime import datetime, timedelta
+# time_classifier.py
 
-def classify_by_recency(published_date):
-    """
-    Classify tender based on publication date.
-    """
+from datetime import datetime
+
+
+def classify_by_recency(publication_date):
+
+    # Convert string to datetime
+    publication_date = datetime.strptime(
+        publication_date,
+        "%d.%m.%Y"
+    )
 
     now = datetime.now()
-    diff = now - published_date
 
-    if diff <= timedelta(days=1):
+    diff = now - publication_date
+
+    days = diff.days
+
+    if days <= 1:
         return "new"
 
-    elif diff <= timedelta(days=7):
+    elif days <= 7:
         return "recent"
 
     else:
